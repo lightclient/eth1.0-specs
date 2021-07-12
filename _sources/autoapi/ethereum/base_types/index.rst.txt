@@ -1,0 +1,464 @@
+:mod:`ethereum.base_types`
+==========================
+
+.. py:module:: ethereum.base_types
+
+Numeric & Array Types
+^^^^^^^^^^^^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+Integer and array types which are used by—but not unique to—Ethereum.
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.base_types.Uint
+   ethereum.base_types.U256
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.base_types.U255_MAX_VALUE
+   ethereum.base_types.U255_CEIL_VALUE
+   ethereum.base_types.U256_MAX_VALUE
+   ethereum.base_types.U256_CEIL_VALUE
+   ethereum.base_types.MAX_VALUE
+   ethereum.base_types.Bytes
+   ethereum.base_types.Bytes64
+   ethereum.base_types.Bytes32
+   ethereum.base_types.Bytes20
+   ethereum.base_types.Bytes8
+
+
+Module Details
+---------------
+
+U255_MAX_VALUE
+~~~~~~~~~~~~~~
+
+.. data:: U255_MAX_VALUE
+   
+
+   
+
+
+U255_CEIL_VALUE
+~~~~~~~~~~~~~~~
+
+.. data:: U255_CEIL_VALUE
+   
+
+   
+
+
+U256_MAX_VALUE
+~~~~~~~~~~~~~~
+
+.. data:: U256_MAX_VALUE
+   
+
+   
+
+
+U256_CEIL_VALUE
+~~~~~~~~~~~~~~~
+
+.. data:: U256_CEIL_VALUE
+   
+
+   
+
+
+Uint
+~~~~
+
+
+Unsigned positive integer.
+
+
+.. class:: Uint
+
+
+   Bases: :py:obj:`int`
+
+   .. attribute:: __slots__
+      :annotation: = []
+
+      
+
+   .. method:: from_be_bytes(cls: Type, buffer: Bytes) -> Uint
+      :classmethod:
+
+      Converts a sequence of bytes into an arbitrarily sized unsigned integer
+      from its big endian representation.
+
+      :param buffer: Bytes to decode.
+
+      :returns: **self** -- Unsigned integer decoded from `buffer`.
+      :rtype: `Uint`
+
+
+   .. method:: __radd__(self, left: int) -> Uint
+
+      Return value+self.
+
+
+   .. method:: __add__(self, right: int) -> Uint
+
+      Return self+value.
+
+
+   .. method:: __iadd__(self, right: int) -> Uint
+
+
+   .. method:: __sub__(self, right: int) -> Uint
+
+      Return self-value.
+
+
+   .. method:: __rsub__(self, left: int) -> Uint
+
+      Return value-self.
+
+
+   .. method:: __isub__(self, right: int) -> Uint
+
+
+   .. method:: __mul__(self, right: int) -> Uint
+
+      Return self*value.
+
+
+   .. method:: __rmul__(self, left: int) -> Uint
+
+      Return value*self.
+
+
+   .. method:: __imul__(self, right: int) -> Uint
+
+
+   .. method:: __floordiv__(self, right: int) -> Uint
+
+      Return self//value.
+
+
+   .. method:: __rfloordiv__(self, left: int) -> Uint
+
+      Return value//self.
+
+
+   .. method:: __ifloordiv__(self, right: int) -> Uint
+
+
+   .. method:: __mod__(self, right: int) -> Uint
+
+      Return self%value.
+
+
+   .. method:: __rmod__(self, left: int) -> Uint
+
+      Return value%self.
+
+
+   .. method:: __imod__(self, right: int) -> Uint
+
+
+   .. method:: __divmod__(self, right: int) -> Tuple[Uint, Uint]
+
+      Return divmod(self, value).
+
+
+   .. method:: __rdivmod__(self, left: int) -> Tuple[Uint, Uint]
+
+      Return divmod(value, self).
+
+
+   .. method:: __pow__(self, right: int, modulo: Optional[int] = None) -> Uint
+
+      Return pow(self, value, mod).
+
+
+   .. method:: __rpow__(self, left: int, modulo: Optional[int] = None) -> Uint
+
+      Return pow(value, self, mod).
+
+
+   .. method:: __ipow__(self, right: int, modulo: Optional[int] = None) -> Uint
+
+
+   .. method:: to_be_bytes32(self) -> Bytes32
+
+      Converts this arbitrarily sized unsigned integer into its big endian
+      representation with exactly 32 bytes.
+
+      :returns: **big_endian** -- Big endian (most significant bits first) representation.
+      :rtype: `Bytes32`
+
+
+   .. method:: to_be_bytes(self) -> Bytes
+
+      Converts this arbitrarily sized unsigned integer into its big endian
+      representation.
+
+      :returns: **big_endian** -- Big endian (most significant bits first) representation.
+      :rtype: `Bytes`
+
+
+
+
+U256
+~~~~
+
+
+Unsigned positive integer, which can represent `0` to `2 ** 256 - 1`,
+inclusive.
+
+
+.. class:: U256
+
+
+   Bases: :py:obj:`int`
+
+   .. attribute:: MAX_VALUE
+      :annotation: :U256
+
+      
+
+   .. attribute:: __slots__
+      :annotation: = []
+
+      
+
+   .. method:: from_be_bytes(cls: Type, buffer: Bytes) -> U256
+      :classmethod:
+
+      Converts a sequence of bytes into an arbitrarily sized unsigned integer
+      from its big endian representation.
+
+      :param buffer: Bytes to decode.
+
+      :returns: **self** -- Unsigned integer decoded from `buffer`.
+      :rtype: `U256`
+
+
+   .. method:: from_signed(cls: Type, value: int) -> U256
+      :classmethod:
+
+      Converts a signed number into a 256-bit unsigned integer.
+
+      :param value: Signed number
+
+      :returns: **self** -- Unsigned integer obtained from `value`.
+      :rtype: `U256`
+
+
+   .. method:: __radd__(self, left: int) -> U256
+
+      Return value+self.
+
+
+   .. method:: __add__(self, right: int) -> U256
+
+      Return self+value.
+
+
+   .. method:: unchecked_add(self, right: int) -> int
+
+
+   .. method:: wrapping_add(self, right: int) -> U256
+
+
+   .. method:: __iadd__(self, right: int) -> U256
+
+
+   .. method:: __sub__(self, right: int) -> U256
+
+      Return self-value.
+
+
+   .. method:: unchecked_sub(self, right: int) -> int
+
+
+   .. method:: wrapping_sub(self, right: int) -> U256
+
+
+   .. method:: __rsub__(self, left: int) -> U256
+
+      Return value-self.
+
+
+   .. method:: __isub__(self, right: int) -> U256
+
+
+   .. method:: unchecked_mul(self, right: int) -> int
+
+
+   .. method:: wrapping_mul(self, right: int) -> U256
+
+
+   .. method:: __mul__(self, right: int) -> U256
+
+      Return self*value.
+
+
+   .. method:: __rmul__(self, left: int) -> U256
+
+      Return value*self.
+
+
+   .. method:: __imul__(self, right: int) -> U256
+
+
+   .. method:: __floordiv__(self, right: int) -> U256
+
+      Return self//value.
+
+
+   .. method:: __rfloordiv__(self, left: int) -> U256
+
+      Return value//self.
+
+
+   .. method:: __ifloordiv__(self, right: int) -> U256
+
+
+   .. method:: __mod__(self, right: int) -> U256
+
+      Return self%value.
+
+
+   .. method:: __rmod__(self, left: int) -> U256
+
+      Return value%self.
+
+
+   .. method:: __imod__(self, right: int) -> U256
+
+
+   .. method:: __divmod__(self, right: int) -> Tuple[U256, U256]
+
+      Return divmod(self, value).
+
+
+   .. method:: __rdivmod__(self, left: int) -> Tuple[U256, U256]
+
+      Return divmod(value, self).
+
+
+   .. method:: unchecked_pow(self, right: int, modulo: Optional[int] = None) -> int
+
+
+   .. method:: wrapping_pow(self, right: int, modulo: Optional[int] = None) -> U256
+
+
+   .. method:: __pow__(self, right: int, modulo: Optional[int] = None) -> U256
+
+      Return pow(self, value, mod).
+
+
+   .. method:: __rpow__(self, left: int, modulo: Optional[int] = None) -> U256
+
+      Return pow(value, self, mod).
+
+
+   .. method:: __ipow__(self, right: int, modulo: Optional[int] = None) -> U256
+
+
+   .. method:: to_be_bytes32(self) -> Bytes32
+
+      Converts this 256-bit unsigned integer into its big endian
+      representation with exactly 32 bytes.
+
+      :returns: **big_endian** -- Big endian (most significant bits first) representation.
+      :rtype: `Bytes32`
+
+
+   .. method:: to_be_bytes(self) -> Bytes
+
+      Converts this 256-bit unsigned integer into its big endian
+      representation, omitting leading zero bytes.
+
+      :returns: **big_endian** -- Big endian (most significant bits first) representation.
+      :rtype: `Bytes`
+
+
+   .. method:: to_signed(self) -> int
+
+      Converts this 256-bit unsigned integer into a signed integer.
+
+      :returns: **signed_int** -- Signed integer obtained from 256-bit unsigned integer.
+      :rtype: `int`
+
+
+
+
+MAX_VALUE
+~~~~~~~~~
+
+.. data:: MAX_VALUE
+   
+
+   
+
+
+Bytes
+~~~~~
+
+.. data:: Bytes
+   
+
+   
+
+
+Bytes64
+~~~~~~~
+
+.. data:: Bytes64
+   
+
+   
+
+
+Bytes32
+~~~~~~~
+
+.. data:: Bytes32
+   
+
+   
+
+
+Bytes20
+~~~~~~~
+
+.. data:: Bytes20
+   
+
+   
+
+
+Bytes8
+~~~~~~
+
+.. data:: Bytes8
+   
+
+   
+

@@ -1,0 +1,391 @@
+:mod:`ethereum.frontier.eth_types`
+==================================
+
+.. py:module:: ethereum.frontier.eth_types
+
+Ethereum Types
+^^^^^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+Types re-used throughout the specification, which are specific to Ethereum.
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.frontier.eth_types.Transaction
+   ethereum.frontier.eth_types.Account
+   ethereum.frontier.eth_types.Header
+   ethereum.frontier.eth_types.Block
+   ethereum.frontier.eth_types.Log
+   ethereum.frontier.eth_types.Receipt
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.frontier.eth_types.Address
+   ethereum.frontier.eth_types.Root
+   ethereum.frontier.eth_types.Storage
+   ethereum.frontier.eth_types.Bloom
+   ethereum.frontier.eth_types.TX_BASE_COST
+   ethereum.frontier.eth_types.TX_DATA_COST_PER_NON_ZERO
+   ethereum.frontier.eth_types.TX_DATA_COST_PER_ZERO
+   ethereum.frontier.eth_types.EMPTY_ACCOUNT
+   ethereum.frontier.eth_types.State
+
+
+Module Details
+---------------
+
+Address
+~~~~~~~
+
+.. data:: Address
+   
+
+   
+
+
+Root
+~~~~
+
+.. data:: Root
+   
+
+   
+
+
+Storage
+~~~~~~~
+
+.. data:: Storage
+   
+
+   
+
+
+Bloom
+~~~~~
+
+.. data:: Bloom
+   
+
+   
+
+
+TX_BASE_COST
+~~~~~~~~~~~~
+
+.. data:: TX_BASE_COST
+   :annotation: = 21000
+
+   
+
+
+TX_DATA_COST_PER_NON_ZERO
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. data:: TX_DATA_COST_PER_NON_ZERO
+   :annotation: = 68
+
+   
+
+
+TX_DATA_COST_PER_ZERO
+~~~~~~~~~~~~~~~~~~~~~
+
+.. data:: TX_DATA_COST_PER_ZERO
+   :annotation: = 4
+
+   
+
+
+Transaction
+~~~~~~~~~~~
+
+
+Atomic operation performed on the block chain.
+
+
+.. class:: Transaction
+
+   .. attribute:: nonce
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   .. attribute:: gas_price
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   .. attribute:: gas
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   .. attribute:: to
+      :annotation: :Optional[Address]
+
+      
+
+   .. attribute:: value
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   .. attribute:: data
+      :annotation: :ethereum.base_types.Bytes
+
+      
+
+   .. attribute:: v
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   .. attribute:: r
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   .. attribute:: s
+      :annotation: :ethereum.base_types.U256
+
+      
+
+
+
+Account
+~~~~~~~
+
+
+State associated with an address.
+
+
+.. class:: Account
+
+   .. attribute:: nonce
+      :annotation: :ethereum.base_types.Uint
+
+      
+
+   .. attribute:: balance
+      :annotation: :ethereum.base_types.Uint
+
+      
+
+   .. attribute:: code
+      :annotation: :bytes
+
+      
+
+   .. attribute:: storage
+      :annotation: :Storage
+
+      
+
+
+
+EMPTY_ACCOUNT
+~~~~~~~~~~~~~
+
+.. data:: EMPTY_ACCOUNT
+   
+
+   
+
+
+Header
+~~~~~~
+
+
+Header portion of a block on the chain.
+
+
+.. class:: Header
+
+   .. attribute:: parent_hash
+      :annotation: :ethereum.crypto.Hash32
+
+      
+
+   .. attribute:: ommers_hash
+      :annotation: :ethereum.crypto.Hash32
+
+      
+
+   .. attribute:: coinbase
+      :annotation: :Address
+
+      
+
+   .. attribute:: state_root
+      :annotation: :Root
+
+      
+
+   .. attribute:: transactions_root
+      :annotation: :Root
+
+      
+
+   .. attribute:: receipt_root
+      :annotation: :Root
+
+      
+
+   .. attribute:: bloom
+      :annotation: :Bloom
+
+      
+
+   .. attribute:: difficulty
+      :annotation: :ethereum.base_types.Uint
+
+      
+
+   .. attribute:: number
+      :annotation: :ethereum.base_types.Uint
+
+      
+
+   .. attribute:: gas_limit
+      :annotation: :ethereum.base_types.Uint
+
+      
+
+   .. attribute:: gas_used
+      :annotation: :ethereum.base_types.Uint
+
+      
+
+   .. attribute:: timestamp
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   .. attribute:: extra_data
+      :annotation: :ethereum.base_types.Bytes
+
+      
+
+   .. attribute:: mix_digest
+      :annotation: :ethereum.base_types.Bytes32
+
+      
+
+   .. attribute:: nonce
+      :annotation: :ethereum.base_types.Bytes8
+
+      
+
+
+
+Block
+~~~~~
+
+
+A complete block.
+
+
+.. class:: Block
+
+   .. attribute:: header
+      :annotation: :Header
+
+      
+
+   .. attribute:: transactions
+      :annotation: :List[Transaction]
+
+      
+
+   .. attribute:: ommers
+      :annotation: :List[Header]
+
+      
+
+
+
+Log
+~~~
+
+
+Data record produced during the execution of a transaction.
+
+
+.. class:: Log
+
+   .. attribute:: address
+      :annotation: :Address
+
+      
+
+   .. attribute:: topics
+      :annotation: :List[ethereum.crypto.Hash32]
+
+      
+
+   .. attribute:: data
+      :annotation: :bytes
+
+      
+
+
+
+Receipt
+~~~~~~~
+
+
+Result of a transaction.
+
+
+.. class:: Receipt
+
+   .. attribute:: post_state
+      :annotation: :Root
+
+      
+
+   .. attribute:: cumulative_gas_used
+      :annotation: :ethereum.base_types.Uint
+
+      
+
+   .. attribute:: bloom
+      :annotation: :Bloom
+
+      
+
+   .. attribute:: logs
+      :annotation: :List[Log]
+
+      
+
+
+
+State
+~~~~~
+
+.. data:: State
+   
+
+   
+

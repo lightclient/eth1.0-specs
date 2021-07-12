@@ -1,0 +1,193 @@
+:mod:`ethereum.frontier.vm`
+===========================
+
+.. py:module:: ethereum.frontier.vm
+
+Ethereum Virtual Machine (EVM)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+The abstract computer which runs the code stored in an
+`eth1spec.eth_types.Account`.
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   instructions/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   error/index.rst
+   gas/index.rst
+   interpreter/index.rst
+   stack/index.rst
+
+
+Package Contents
+----------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.frontier.vm.Environment
+   ethereum.frontier.vm.Evm
+
+
+
+
+Package Details
+----------------
+
+Environment
+~~~~~~~~~~~
+
+
+Items external to the virtual machine itself, provided by the environment.
+
+
+.. class:: Environment
+
+   .. attribute:: caller
+      :annotation: :ethereum.frontier.eth_types.Address
+
+      
+
+   .. attribute:: block_hashes
+      :annotation: :List[ethereum.crypto.Hash32]
+
+      
+
+   .. attribute:: origin
+      :annotation: :ethereum.frontier.eth_types.Address
+
+      
+
+   .. attribute:: coinbase
+      :annotation: :ethereum.frontier.eth_types.Address
+
+      
+
+   .. attribute:: number
+      :annotation: :ethereum.base_types.Uint
+
+      
+
+   .. attribute:: gas_limit
+      :annotation: :ethereum.base_types.Uint
+
+      
+
+   .. attribute:: gas_price
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   .. attribute:: time
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   .. attribute:: difficulty
+      :annotation: :ethereum.base_types.Uint
+
+      
+
+   .. attribute:: state
+      :annotation: :ethereum.frontier.eth_types.State
+
+      
+
+
+
+Evm
+~~~
+
+
+The internal state of the virtual machine.
+
+
+.. class:: Evm
+
+   .. attribute:: pc
+      :annotation: :ethereum.base_types.Uint
+
+      
+
+   .. attribute:: stack
+      :annotation: :List[ethereum.base_types.U256]
+
+      
+
+   .. attribute:: memory
+      :annotation: :bytearray
+
+      
+
+   .. attribute:: code
+      :annotation: :bytes
+
+      
+
+   .. attribute:: gas_left
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   .. attribute:: current
+      :annotation: :ethereum.frontier.eth_types.Address
+
+      
+
+   .. attribute:: caller
+      :annotation: :ethereum.frontier.eth_types.Address
+
+      
+
+   .. attribute:: data
+      :annotation: :bytes
+
+      
+
+   .. attribute:: value
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   .. attribute:: depth
+      :annotation: :ethereum.base_types.Uint
+
+      
+
+   .. attribute:: env
+      :annotation: :Environment
+
+      
+
+   .. attribute:: refund_counter
+      :annotation: :ethereum.base_types.Uint
+
+      
+
+   .. attribute:: running
+      :annotation: :bool
+
+      
+
+

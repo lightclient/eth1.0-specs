@@ -1,0 +1,442 @@
+:mod:`ethereum.frontier.spec`
+=============================
+
+.. py:module:: ethereum.frontier.spec
+
+Ethereum Specification
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+Entry point for the Ethereum specification.
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.frontier.spec.BlockChain
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+   :nosignatures:
+
+   ethereum.frontier.spec.state_transition
+   ethereum.frontier.spec.validate_header
+   ethereum.frontier.spec.apply_body
+   ethereum.frontier.spec.compute_ommers_hash
+   ethereum.frontier.spec.process_transaction
+   ethereum.frontier.spec.validate_transaction
+   ethereum.frontier.spec.calculate_intrinsic_cost
+   ethereum.frontier.spec.recover_sender
+   ethereum.frontier.spec.signing_hash
+   ethereum.frontier.spec.compute_header_hash
+   ethereum.frontier.spec.get_block_header_by_hash
+   ethereum.frontier.spec.check_proof_of_work
+   ethereum.frontier.spec.check_gas_limit
+   ethereum.frontier.spec.calculate_block_difficulty
+   ethereum.frontier.spec.print_state
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.frontier.spec.BLOCK_REWARD
+   ethereum.frontier.spec.GAS_LIMIT_ADJUSTMENT_FACTOR
+   ethereum.frontier.spec.GAS_LIMIT_MINIMUM
+   ethereum.frontier.spec.GENESIS_DIFFICULTY
+
+
+Module Details
+---------------
+
+BLOCK_REWARD
+~~~~~~~~~~~~
+
+.. data:: BLOCK_REWARD
+   
+
+   
+
+
+GAS_LIMIT_ADJUSTMENT_FACTOR
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. data:: GAS_LIMIT_ADJUSTMENT_FACTOR
+   :annotation: = 1024
+
+   
+
+
+GAS_LIMIT_MINIMUM
+~~~~~~~~~~~~~~~~~
+
+.. data:: GAS_LIMIT_MINIMUM
+   :annotation: = 125000
+
+   
+
+
+GENESIS_DIFFICULTY
+~~~~~~~~~~~~~~~~~~
+
+.. data:: GENESIS_DIFFICULTY
+   
+
+   
+
+
+BlockChain
+~~~~~~~~~~
+
+
+History and current state of the block chain.
+
+
+.. class:: BlockChain
+
+   .. attribute:: blocks
+      :annotation: :List[ethereum.frontier.eth_types.Block]
+
+      
+
+   .. attribute:: state
+      :annotation: :ethereum.frontier.eth_types.State
+
+      
+
+
+
+state_transition
+~~~~~~~~~~~~~~~~
+
+
+.. function:: state_transition(chain: BlockChain, block: ethereum.frontier.eth_types.Block) -> None
+   :noindexentry:
+
+   Attempts to apply a block to an existing block chain.
+
+   :param chain: History and current state.
+   :param block: Block to apply to `chain`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 54-86
+
+validate_header
+~~~~~~~~~~~~~~~
+
+
+.. function:: validate_header(header: ethereum.frontier.eth_types.Header, parent_header: ethereum.frontier.eth_types.Header) -> None
+   :noindexentry:
+
+   Verifies a block header.
+
+   :param header: Header to check for correctness.
+   :param parent_header: Parent Header of the header to check for correctness
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 89-112
+
+apply_body
+~~~~~~~~~~
+
+
+.. function:: apply_body(state: ethereum.frontier.eth_types.State, coinbase: ethereum.frontier.eth_types.Address, block_number: ethereum.base_types.Uint, block_gas_limit: ethereum.base_types.Uint, block_time: ethereum.base_types.U256, block_difficulty: ethereum.base_types.Uint, transactions: List[ethereum.frontier.eth_types.Transaction], ommers: List[ethereum.frontier.eth_types.Header]) -> Tuple[ethereum.base_types.Uint, ethereum.frontier.eth_types.Root, ethereum.frontier.eth_types.Root, ethereum.frontier.eth_types.State]
+   :noindexentry:
+
+   Executes a block.
+
+   :param state: Current account state.
+   :param coinbase: Address of account which receives block reward and transaction fees.
+   :param block_number: Position of the block within the chain.
+   :param block_gas_limit: Initial amount of gas available for execution in this block.
+   :param block_time: Time the block was produced, measured in seconds since the epoch.
+   :param block_difficulty: Difficulty of the block.
+   :param transactions: Transactions included in the block.
+   :param ommers: Headers of ancestor blocks which are not direct parents (formerly
+                  uncles.)
+
+   :returns: * **gas_available** (`eth1spec.base_types.Uint`) -- Remaining gas after all transactions have been executed.
+             * **root** (`eth1spec.eth_types.Root`) -- State root after all transactions have been executed.
+             * **state** (`eth1spec.eth_types.State`) -- State after all transactions have been executed.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 115-209
+
+compute_ommers_hash
+~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: compute_ommers_hash(block: ethereum.frontier.eth_types.Block) -> ethereum.frontier.eth_types.Hash32
+   :noindexentry:
+
+   Compute hash of ommers list for a block
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 212-216
+
+process_transaction
+~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: process_transaction(env: ethereum.frontier.vm.Environment, tx: ethereum.frontier.eth_types.Transaction) -> Tuple[ethereum.base_types.U256, List[ethereum.frontier.eth_types.Log]]
+   :noindexentry:
+
+   Execute a transaction against the provided environment.
+
+   :param env: Environment for the Ethereum Virtual Machine.
+   :param tx: Transaction to execute.
+
+   :returns: * **gas_left** (`eth1spec.base_types.U256`) -- Remaining gas after execution.
+             * **logs** (`List[eth1spec.eth_types.Log]`) -- Logs generated during execution.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 219-264
+
+validate_transaction
+~~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: validate_transaction(tx: ethereum.frontier.eth_types.Transaction) -> bool
+   :noindexentry:
+
+   Verifies a transaction.
+
+   :param tx: Transaction to validate.
+
+   :returns: **verified** -- True if the transaction can be executed, or False otherwise.
+   :rtype: `bool`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 267-281
+
+calculate_intrinsic_cost
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: calculate_intrinsic_cost(tx: ethereum.frontier.eth_types.Transaction) -> ethereum.base_types.Uint
+   :noindexentry:
+
+   Calculates the intrinsic cost of the transaction that is charged before
+   execution is instantiated.
+
+   :param tx: Transaction to compute the intrinsic cost of.
+
+   :returns: **verified** -- The intrinsic cost of the transaction.
+   :rtype: `eth1spec.base_types.Uint`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 284-307
+
+recover_sender
+~~~~~~~~~~~~~~
+
+
+.. function:: recover_sender(tx: ethereum.frontier.eth_types.Transaction) -> ethereum.frontier.eth_types.Address
+   :noindexentry:
+
+   Extracts the sender address from a transaction.
+
+   :param tx: Transaction of interest.
+
+   :returns: **sender** -- The address of the account that signed the transaction.
+   :rtype: `eth1spec.eth_types.Address`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 310-340
+
+signing_hash
+~~~~~~~~~~~~
+
+
+.. function:: signing_hash(tx: ethereum.frontier.eth_types.Transaction) -> ethereum.frontier.eth_types.Hash32
+   :noindexentry:
+
+   Compute the hash of a transaction used in the signature.
+
+   :param tx: Transaction of interest.
+
+   :returns: **hash** -- Hash of the transaction.
+   :rtype: `eth1spec.eth_types.Hash32`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 343-365
+
+compute_header_hash
+~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: compute_header_hash(header: ethereum.frontier.eth_types.Header) -> ethereum.frontier.eth_types.Hash32
+   :noindexentry:
+
+   Computes the hash of a block header.
+
+   :param header: Header of interest.
+
+   :returns: **hash** -- Hash of the header.
+   :rtype: `ethereum.eth_types.Hash32`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 371-385
+
+get_block_header_by_hash
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: get_block_header_by_hash(hash: ethereum.frontier.eth_types.Hash32, chain: BlockChain) -> ethereum.frontier.eth_types.Header
+   :noindexentry:
+
+   Fetches the block header with the corresponding hash.
+
+   :param hash: Hash of the header of interest.
+   :param chain: History and current state.
+
+   :returns: **Header** -- Block header found by its hash.
+   :rtype: `ethereum.eth_types.Header`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 388-409
+
+check_proof_of_work
+~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: check_proof_of_work(header: ethereum.frontier.eth_types.Header) -> bool
+   :noindexentry:
+
+   Validates the Proof of Work constraints.
+
+   :param header: Header of interest.
+
+   :returns: **check** -- True if Proof of Work constraints are satisfied, False otherwise.
+   :rtype: `bool`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 412-429
+
+check_gas_limit
+~~~~~~~~~~~~~~~
+
+
+.. function:: check_gas_limit(gas_limit: ethereum.base_types.Uint, parent_gas_limit: ethereum.base_types.Uint) -> bool
+   :noindexentry:
+
+   Validates the gas limit for a block.
+
+   :param gas_limit: Gas limit to validate.
+   :param parent_gas_limit: Gas limit of the parent block.
+
+   :returns: **check** -- True if gas limit constraints are satisfied, False otherwise.
+   :rtype: `bool`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 432-457
+
+calculate_block_difficulty
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: calculate_block_difficulty(number: ethereum.base_types.Uint, timestamp: ethereum.base_types.U256, parent_timestamp: ethereum.base_types.U256, parent_difficulty: ethereum.base_types.Uint) -> ethereum.base_types.Uint
+   :noindexentry:
+
+   Computes difficulty of a block using its header and parent header.
+   :param number: Block number of the block
+   :param timestamp: Timestmap of the block
+   :param parent_timestamp: Timestanp of the parent block
+   :param parent_difficulty: difficulty of the parent block
+
+   :returns: **difficulty** -- Computed difficulty for a block.
+   :rtype: `ethereum.base_types.Uint`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 460-491
+
+print_state
+~~~~~~~~~~~
+
+
+.. function:: print_state(state: ethereum.frontier.eth_types.State) -> None
+   :noindexentry:
+
+   Pretty prints the state.
+
+   :param state: Ethereum state.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/spec.py
+   :language: python
+   :lines: 495-516

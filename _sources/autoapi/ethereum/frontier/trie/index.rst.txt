@@ -1,0 +1,225 @@
+:mod:`ethereum.frontier.trie`
+=============================
+
+.. py:module:: ethereum.frontier.trie
+
+State Trie
+^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+The state trie is the structure responsible for storing
+`eth1spec.eth_types.Account` objects.
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+   :nosignatures:
+
+   ethereum.frontier.trie.nibble_list_to_compact
+   ethereum.frontier.trie.map_keys
+   ethereum.frontier.trie.encode_leaf
+   ethereum.frontier.trie.root
+   ethereum.frontier.trie.node_cap
+   ethereum.frontier.trie.patricialize
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.frontier.trie.debug
+   ethereum.frontier.trie.verbose
+   ethereum.frontier.trie.Node
+
+
+Module Details
+---------------
+
+debug
+~~~~~
+
+.. data:: debug
+   :annotation: = False
+
+   
+
+
+verbose
+~~~~~~~
+
+.. data:: verbose
+   :annotation: = False
+
+   
+
+
+Node
+~~~~
+
+.. data:: Node
+   
+
+   
+
+
+nibble_list_to_compact
+~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: nibble_list_to_compact(x: ethereum.base_types.Bytes, terminal: bool) -> bytearray
+   :noindexentry:
+
+   Compresses nibble-list into a standard byte array with a flag.
+
+   A nibble-list is a list of byte values no greater than `15`. The flag is
+   encoded in high nibble of the highest byte. The flag nibble can be broken
+   down into two two-bit flags.
+
+   Highest nibble::
+
+       +---+---+----------+--------+
+       | _ | _ | terminal | parity |
+       +---+---+----------+--------+
+         3   2      1         0
+
+
+   The lowest bit of the nibble encodes the parity of the length of the
+   remaining nibbles -- `0` when even and `1` when odd. The second lowest bit
+   encodes whether the key maps to a terminal node. The other two bits are not
+   used.
+
+   :param x: Array of nibbles.
+   :param terminal: Flag denoting if the key points to a terminal (leaf) node.
+
+   :returns: **compressed** -- Compact byte array.
+   :rtype: `bytearray`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/trie.py
+   :language: python
+   :lines: 30-74
+
+map_keys
+~~~~~~~~
+
+
+.. function:: map_keys(obj: Mapping[ethereum.base_types.Bytes, Node], secured: bool = True) -> Mapping[ethereum.base_types.Bytes, Node]
+   :noindexentry:
+
+   Maps all compact keys to nibble-list format. Optionally hashes the keys.
+
+   :param obj: Underlying trie key-value pairs.
+   :param secured: Denotes whether the keys should be hashed. Defaults to `true`.
+
+   :returns: **out** -- Object with keys mapped to nibble-byte form.
+   :rtype: `Mapping[eth1spec.base_types.Bytes, Node]`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/trie.py
+   :language: python
+   :lines: 77-122
+
+encode_leaf
+~~~~~~~~~~~
+
+
+.. function:: encode_leaf(leaf: Node) -> ethereum.frontier.rlp.RLP
+   :noindexentry:
+
+   RLP encode leaf nodes of the Trie.
+   Currently leaf nodes can be `Account`, `Transaction`, `Receipt`
+   dataclasses.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/trie.py
+   :language: python
+   :lines: 125-134
+
+root
+~~~~
+
+
+.. function:: root(obj: Mapping[ethereum.base_types.Bytes, Node]) -> ethereum.frontier.eth_types.Root
+   :noindexentry:
+
+   Computes the root of a modified merkle patricia trie (MPT).
+
+   :param obj: Underlying trie key-value pairs.
+
+   :returns: **root** -- MPT root of the underlying key-value pairs.
+   :rtype: `eth1spec.eth_types.Root`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/trie.py
+   :language: python
+   :lines: 137-152
+
+node_cap
+~~~~~~~~
+
+
+.. function:: node_cap(obj: Mapping[ethereum.base_types.Bytes, Node], i: ethereum.base_types.Uint) -> ethereum.frontier.rlp.RLP
+   :noindexentry:
+
+   Internal nodes less than 32 bytes in length are represented by themselves
+   directly. Larger nodes are hashed once to cap their size to 32 bytes.
+
+   :param obj: Underlying trie key-value pairs.
+   :param i: Current trie level.
+
+   :returns: **hash** -- Internal node commitment.
+   :rtype: `eth1spec.eth_types.Hash32`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/trie.py
+   :language: python
+   :lines: 155-179
+
+patricialize
+~~~~~~~~~~~~
+
+
+.. function:: patricialize(obj: Mapping[ethereum.base_types.Bytes, Node], i: ethereum.base_types.Uint) -> ethereum.frontier.rlp.RLP
+   :noindexentry:
+
+   Structural composition function.
+
+   Used to recursively patricialize and merkleize a dictionary. Includes
+   memoization of the tree structure and hashes.
+
+   :param obj: Underlying trie key-value pairs.
+   :param i: Current trie level.
+
+   :returns: **node** -- Root node of `obj`.
+   :rtype: `eth1spec.base_types.Bytes`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/trie.py
+   :language: python
+   :lines: 182-271

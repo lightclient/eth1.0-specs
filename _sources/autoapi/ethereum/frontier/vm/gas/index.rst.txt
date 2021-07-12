@@ -1,0 +1,132 @@
+:mod:`ethereum.frontier.vm.gas`
+===============================
+
+.. py:module:: ethereum.frontier.vm.gas
+
+Ethereum Virtual Machine (EVM) Gas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+EVM gas constants and calculators.
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+   :nosignatures:
+
+   ethereum.frontier.vm.gas.subtract_gas
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.frontier.vm.gas.GAS_VERY_LOW
+   ethereum.frontier.vm.gas.GAS_STORAGE_SET
+   ethereum.frontier.vm.gas.GAS_STORAGE_UPDATE
+   ethereum.frontier.vm.gas.GAS_STORAGE_CLEAR_REFUND
+   ethereum.frontier.vm.gas.GAS_LOW
+   ethereum.frontier.vm.gas.GAS_MID
+   ethereum.frontier.vm.gas.GAS_EXPONENTIATION
+
+
+Module Details
+---------------
+
+GAS_VERY_LOW
+~~~~~~~~~~~~
+
+.. data:: GAS_VERY_LOW
+   
+
+   
+
+
+GAS_STORAGE_SET
+~~~~~~~~~~~~~~~
+
+.. data:: GAS_STORAGE_SET
+   
+
+   
+
+
+GAS_STORAGE_UPDATE
+~~~~~~~~~~~~~~~~~~
+
+.. data:: GAS_STORAGE_UPDATE
+   
+
+   
+
+
+GAS_STORAGE_CLEAR_REFUND
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. data:: GAS_STORAGE_CLEAR_REFUND
+   
+
+   
+
+
+GAS_LOW
+~~~~~~~
+
+.. data:: GAS_LOW
+   
+
+   
+
+
+GAS_MID
+~~~~~~~
+
+.. data:: GAS_MID
+   
+
+   
+
+
+GAS_EXPONENTIATION
+~~~~~~~~~~~~~~~~~~
+
+.. data:: GAS_EXPONENTIATION
+   
+
+   
+
+
+subtract_gas
+~~~~~~~~~~~~
+
+
+.. function:: subtract_gas(gas_left: ethereum.base_types.U256, amount: ethereum.base_types.U256) -> ethereum.base_types.U256
+   :noindexentry:
+
+   Subtracts `amount` from `gas_left`.
+
+   :param gas_left: The amount of gas left in the current frame.
+   :param amount: The amount of gas the current operation requires.
+
+   :raises OutOfGasError: If `gas_left` is less than `amount`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/gas.py
+   :language: python
+   :lines: 28-47

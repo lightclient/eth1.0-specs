@@ -1,0 +1,753 @@
+:mod:`ethereum.frontier.vm.instructions.stack`
+==============================================
+
+.. py:module:: ethereum.frontier.vm.instructions.stack
+
+Ethereum Virtual Machine (EVM) stack Instructions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+Implementations of the EVM stack related instructions.
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+   :nosignatures:
+
+   ethereum.frontier.vm.instructions.stack.push_n
+   ethereum.frontier.vm.instructions.stack.dup_n
+   ethereum.frontier.vm.instructions.stack.swap_n
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.frontier.vm.instructions.stack.push1
+   ethereum.frontier.vm.instructions.stack.push2
+   ethereum.frontier.vm.instructions.stack.push3
+   ethereum.frontier.vm.instructions.stack.push4
+   ethereum.frontier.vm.instructions.stack.push5
+   ethereum.frontier.vm.instructions.stack.push6
+   ethereum.frontier.vm.instructions.stack.push7
+   ethereum.frontier.vm.instructions.stack.push8
+   ethereum.frontier.vm.instructions.stack.push9
+   ethereum.frontier.vm.instructions.stack.push10
+   ethereum.frontier.vm.instructions.stack.push11
+   ethereum.frontier.vm.instructions.stack.push12
+   ethereum.frontier.vm.instructions.stack.push13
+   ethereum.frontier.vm.instructions.stack.push14
+   ethereum.frontier.vm.instructions.stack.push15
+   ethereum.frontier.vm.instructions.stack.push16
+   ethereum.frontier.vm.instructions.stack.push17
+   ethereum.frontier.vm.instructions.stack.push18
+   ethereum.frontier.vm.instructions.stack.push19
+   ethereum.frontier.vm.instructions.stack.push20
+   ethereum.frontier.vm.instructions.stack.push21
+   ethereum.frontier.vm.instructions.stack.push22
+   ethereum.frontier.vm.instructions.stack.push23
+   ethereum.frontier.vm.instructions.stack.push24
+   ethereum.frontier.vm.instructions.stack.push25
+   ethereum.frontier.vm.instructions.stack.push26
+   ethereum.frontier.vm.instructions.stack.push27
+   ethereum.frontier.vm.instructions.stack.push28
+   ethereum.frontier.vm.instructions.stack.push29
+   ethereum.frontier.vm.instructions.stack.push30
+   ethereum.frontier.vm.instructions.stack.push31
+   ethereum.frontier.vm.instructions.stack.push32
+   ethereum.frontier.vm.instructions.stack.dup1
+   ethereum.frontier.vm.instructions.stack.dup2
+   ethereum.frontier.vm.instructions.stack.dup3
+   ethereum.frontier.vm.instructions.stack.dup4
+   ethereum.frontier.vm.instructions.stack.dup5
+   ethereum.frontier.vm.instructions.stack.dup6
+   ethereum.frontier.vm.instructions.stack.dup7
+   ethereum.frontier.vm.instructions.stack.dup8
+   ethereum.frontier.vm.instructions.stack.dup9
+   ethereum.frontier.vm.instructions.stack.dup10
+   ethereum.frontier.vm.instructions.stack.dup11
+   ethereum.frontier.vm.instructions.stack.dup12
+   ethereum.frontier.vm.instructions.stack.dup13
+   ethereum.frontier.vm.instructions.stack.dup14
+   ethereum.frontier.vm.instructions.stack.dup15
+   ethereum.frontier.vm.instructions.stack.dup16
+   ethereum.frontier.vm.instructions.stack.swap1
+   ethereum.frontier.vm.instructions.stack.swap2
+   ethereum.frontier.vm.instructions.stack.swap3
+   ethereum.frontier.vm.instructions.stack.swap4
+   ethereum.frontier.vm.instructions.stack.swap5
+   ethereum.frontier.vm.instructions.stack.swap6
+   ethereum.frontier.vm.instructions.stack.swap7
+   ethereum.frontier.vm.instructions.stack.swap8
+   ethereum.frontier.vm.instructions.stack.swap9
+   ethereum.frontier.vm.instructions.stack.swap10
+   ethereum.frontier.vm.instructions.stack.swap11
+   ethereum.frontier.vm.instructions.stack.swap12
+   ethereum.frontier.vm.instructions.stack.swap13
+   ethereum.frontier.vm.instructions.stack.swap14
+   ethereum.frontier.vm.instructions.stack.swap15
+   ethereum.frontier.vm.instructions.stack.swap16
+
+
+Module Details
+---------------
+
+push_n
+~~~~~~
+
+
+.. function:: push_n(evm: ethereum.frontier.vm.Evm, num_bytes: int) -> None
+   :noindexentry:
+
+   Pushes a N-byte immediate onto the stack.
+
+   :param evm: The current EVM frame.
+   :param num_bytes: The number of immediate bytes to be read from the code and pushed to
+                     the stack.
+
+   :raises StackOverflowError: If `len(stack)` is equals `1024`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `3`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
+   :language: python
+   :lines: 24-52
+
+dup_n
+~~~~~
+
+
+.. function:: dup_n(evm: ethereum.frontier.vm.Evm, item_number: int) -> None
+   :noindexentry:
+
+   Duplicate the Nth stack item (from top of the stack) to the top of stack.
+
+   :param evm: The current EVM frame.
+   :param item_number: The stack item number (0-indexed from top of stack) to be duplicated
+                       to the top of stack.
+
+   :raises OutOfGasError: If `evm.gas_left` is less than `3`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
+   :language: python
+   :lines: 55-77
+
+swap_n
+~~~~~~
+
+
+.. function:: swap_n(evm: ethereum.frontier.vm.Evm, item_number: int) -> None
+   :noindexentry:
+
+   Swap the 1st and Nth items in the stack. All items are 0-indexed from the
+   top of the stack.
+   If N is 0, then this is a Noop. Regardless, `swap_n` with N as 0 isn't
+   a valid EVM opcode and hence shouldn't be used.
+
+   :param evm: The current EVM frame.
+   :param item_number: The stack item number (0-indexed from top of stack) to be swapped
+                       with the top of stack element.
+
+   :raises OutOfGasError: If `evm.gas_left` is less than `3`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
+   :language: python
+   :lines: 80-108
+
+push1
+~~~~~
+
+.. data:: push1
+   
+
+   
+
+
+push2
+~~~~~
+
+.. data:: push2
+   
+
+   
+
+
+push3
+~~~~~
+
+.. data:: push3
+   
+
+   
+
+
+push4
+~~~~~
+
+.. data:: push4
+   
+
+   
+
+
+push5
+~~~~~
+
+.. data:: push5
+   
+
+   
+
+
+push6
+~~~~~
+
+.. data:: push6
+   
+
+   
+
+
+push7
+~~~~~
+
+.. data:: push7
+   
+
+   
+
+
+push8
+~~~~~
+
+.. data:: push8
+   
+
+   
+
+
+push9
+~~~~~
+
+.. data:: push9
+   
+
+   
+
+
+push10
+~~~~~~
+
+.. data:: push10
+   
+
+   
+
+
+push11
+~~~~~~
+
+.. data:: push11
+   
+
+   
+
+
+push12
+~~~~~~
+
+.. data:: push12
+   
+
+   
+
+
+push13
+~~~~~~
+
+.. data:: push13
+   
+
+   
+
+
+push14
+~~~~~~
+
+.. data:: push14
+   
+
+   
+
+
+push15
+~~~~~~
+
+.. data:: push15
+   
+
+   
+
+
+push16
+~~~~~~
+
+.. data:: push16
+   
+
+   
+
+
+push17
+~~~~~~
+
+.. data:: push17
+   
+
+   
+
+
+push18
+~~~~~~
+
+.. data:: push18
+   
+
+   
+
+
+push19
+~~~~~~
+
+.. data:: push19
+   
+
+   
+
+
+push20
+~~~~~~
+
+.. data:: push20
+   
+
+   
+
+
+push21
+~~~~~~
+
+.. data:: push21
+   
+
+   
+
+
+push22
+~~~~~~
+
+.. data:: push22
+   
+
+   
+
+
+push23
+~~~~~~
+
+.. data:: push23
+   
+
+   
+
+
+push24
+~~~~~~
+
+.. data:: push24
+   
+
+   
+
+
+push25
+~~~~~~
+
+.. data:: push25
+   
+
+   
+
+
+push26
+~~~~~~
+
+.. data:: push26
+   
+
+   
+
+
+push27
+~~~~~~
+
+.. data:: push27
+   
+
+   
+
+
+push28
+~~~~~~
+
+.. data:: push28
+   
+
+   
+
+
+push29
+~~~~~~
+
+.. data:: push29
+   
+
+   
+
+
+push30
+~~~~~~
+
+.. data:: push30
+   
+
+   
+
+
+push31
+~~~~~~
+
+.. data:: push31
+   
+
+   
+
+
+push32
+~~~~~~
+
+.. data:: push32
+   
+
+   
+
+
+dup1
+~~~~
+
+.. data:: dup1
+   
+
+   
+
+
+dup2
+~~~~
+
+.. data:: dup2
+   
+
+   
+
+
+dup3
+~~~~
+
+.. data:: dup3
+   
+
+   
+
+
+dup4
+~~~~
+
+.. data:: dup4
+   
+
+   
+
+
+dup5
+~~~~
+
+.. data:: dup5
+   
+
+   
+
+
+dup6
+~~~~
+
+.. data:: dup6
+   
+
+   
+
+
+dup7
+~~~~
+
+.. data:: dup7
+   
+
+   
+
+
+dup8
+~~~~
+
+.. data:: dup8
+   
+
+   
+
+
+dup9
+~~~~
+
+.. data:: dup9
+   
+
+   
+
+
+dup10
+~~~~~
+
+.. data:: dup10
+   
+
+   
+
+
+dup11
+~~~~~
+
+.. data:: dup11
+   
+
+   
+
+
+dup12
+~~~~~
+
+.. data:: dup12
+   
+
+   
+
+
+dup13
+~~~~~
+
+.. data:: dup13
+   
+
+   
+
+
+dup14
+~~~~~
+
+.. data:: dup14
+   
+
+   
+
+
+dup15
+~~~~~
+
+.. data:: dup15
+   
+
+   
+
+
+dup16
+~~~~~
+
+.. data:: dup16
+   
+
+   
+
+
+swap1
+~~~~~
+
+.. data:: swap1
+   
+
+   
+
+
+swap2
+~~~~~
+
+.. data:: swap2
+   
+
+   
+
+
+swap3
+~~~~~
+
+.. data:: swap3
+   
+
+   
+
+
+swap4
+~~~~~
+
+.. data:: swap4
+   
+
+   
+
+
+swap5
+~~~~~
+
+.. data:: swap5
+   
+
+   
+
+
+swap6
+~~~~~
+
+.. data:: swap6
+   
+
+   
+
+
+swap7
+~~~~~
+
+.. data:: swap7
+   
+
+   
+
+
+swap8
+~~~~~
+
+.. data:: swap8
+   
+
+   
+
+
+swap9
+~~~~~
+
+.. data:: swap9
+   
+
+   
+
+
+swap10
+~~~~~~
+
+.. data:: swap10
+   
+
+   
+
+
+swap11
+~~~~~~
+
+.. data:: swap11
+   
+
+   
+
+
+swap12
+~~~~~~
+
+.. data:: swap12
+   
+
+   
+
+
+swap13
+~~~~~~
+
+.. data:: swap13
+   
+
+   
+
+
+swap14
+~~~~~~
+
+.. data:: swap14
+   
+
+   
+
+
+swap15
+~~~~~~
+
+.. data:: swap15
+   
+
+   
+
+
+swap16
+~~~~~~
+
+.. data:: swap16
+   
+
+   
+

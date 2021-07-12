@@ -1,0 +1,461 @@
+:mod:`ethereum.frontier.vm.instructions`
+========================================
+
+.. py:module:: ethereum.frontier.vm.instructions
+
+EVM Instruction Encoding (Opcodes)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+Machine readable representations of EVM instructions, and a mapping to their
+implementations.
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   arithmetic/index.rst
+   control_flow/index.rst
+   stack/index.rst
+   storage/index.rst
+
+
+Package Contents
+----------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.frontier.vm.instructions.Ops
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.frontier.vm.instructions.op_implementation
+
+
+Package Details
+----------------
+
+Ops
+~~~
+
+
+Enum for EVM Opcodes
+
+
+.. class:: Ops
+
+   Bases: :py:obj:`enum.Enum`
+
+   .. attribute:: ADD
+      :annotation: = 1
+
+      
+
+   .. attribute:: MUL
+      :annotation: = 2
+
+      
+
+   .. attribute:: SUB
+      :annotation: = 3
+
+      
+
+   .. attribute:: DIV
+      :annotation: = 4
+
+      
+
+   .. attribute:: SDIV
+      :annotation: = 5
+
+      
+
+   .. attribute:: MOD
+      :annotation: = 6
+
+      
+
+   .. attribute:: SMOD
+      :annotation: = 7
+
+      
+
+   .. attribute:: ADDMOD
+      :annotation: = 8
+
+      
+
+   .. attribute:: MULMOD
+      :annotation: = 9
+
+      
+
+   .. attribute:: EXP
+      :annotation: = 10
+
+      
+
+   .. attribute:: SIGNEXTEND
+      :annotation: = 11
+
+      
+
+   .. attribute:: STOP
+      :annotation: = 0
+
+      
+
+   .. attribute:: SSTORE
+      :annotation: = 85
+
+      
+
+   .. attribute:: PUSH1
+      :annotation: = 96
+
+      
+
+   .. attribute:: PUSH2
+      :annotation: = 97
+
+      
+
+   .. attribute:: PUSH3
+      :annotation: = 98
+
+      
+
+   .. attribute:: PUSH4
+      :annotation: = 99
+
+      
+
+   .. attribute:: PUSH5
+      :annotation: = 100
+
+      
+
+   .. attribute:: PUSH6
+      :annotation: = 101
+
+      
+
+   .. attribute:: PUSH7
+      :annotation: = 102
+
+      
+
+   .. attribute:: PUSH8
+      :annotation: = 103
+
+      
+
+   .. attribute:: PUSH9
+      :annotation: = 104
+
+      
+
+   .. attribute:: PUSH10
+      :annotation: = 105
+
+      
+
+   .. attribute:: PUSH11
+      :annotation: = 106
+
+      
+
+   .. attribute:: PUSH12
+      :annotation: = 107
+
+      
+
+   .. attribute:: PUSH13
+      :annotation: = 108
+
+      
+
+   .. attribute:: PUSH14
+      :annotation: = 109
+
+      
+
+   .. attribute:: PUSH15
+      :annotation: = 110
+
+      
+
+   .. attribute:: PUSH16
+      :annotation: = 111
+
+      
+
+   .. attribute:: PUSH17
+      :annotation: = 112
+
+      
+
+   .. attribute:: PUSH18
+      :annotation: = 113
+
+      
+
+   .. attribute:: PUSH19
+      :annotation: = 114
+
+      
+
+   .. attribute:: PUSH20
+      :annotation: = 115
+
+      
+
+   .. attribute:: PUSH21
+      :annotation: = 116
+
+      
+
+   .. attribute:: PUSH22
+      :annotation: = 117
+
+      
+
+   .. attribute:: PUSH23
+      :annotation: = 118
+
+      
+
+   .. attribute:: PUSH24
+      :annotation: = 119
+
+      
+
+   .. attribute:: PUSH25
+      :annotation: = 120
+
+      
+
+   .. attribute:: PUSH26
+      :annotation: = 121
+
+      
+
+   .. attribute:: PUSH27
+      :annotation: = 122
+
+      
+
+   .. attribute:: PUSH28
+      :annotation: = 123
+
+      
+
+   .. attribute:: PUSH29
+      :annotation: = 124
+
+      
+
+   .. attribute:: PUSH30
+      :annotation: = 125
+
+      
+
+   .. attribute:: PUSH31
+      :annotation: = 126
+
+      
+
+   .. attribute:: PUSH32
+      :annotation: = 127
+
+      
+
+   .. attribute:: DUP1
+      :annotation: = 128
+
+      
+
+   .. attribute:: DUP2
+      :annotation: = 129
+
+      
+
+   .. attribute:: DUP3
+      :annotation: = 130
+
+      
+
+   .. attribute:: DUP4
+      :annotation: = 131
+
+      
+
+   .. attribute:: DUP5
+      :annotation: = 132
+
+      
+
+   .. attribute:: DUP6
+      :annotation: = 133
+
+      
+
+   .. attribute:: DUP7
+      :annotation: = 134
+
+      
+
+   .. attribute:: DUP8
+      :annotation: = 135
+
+      
+
+   .. attribute:: DUP9
+      :annotation: = 136
+
+      
+
+   .. attribute:: DUP10
+      :annotation: = 137
+
+      
+
+   .. attribute:: DUP11
+      :annotation: = 138
+
+      
+
+   .. attribute:: DUP12
+      :annotation: = 139
+
+      
+
+   .. attribute:: DUP13
+      :annotation: = 140
+
+      
+
+   .. attribute:: DUP14
+      :annotation: = 141
+
+      
+
+   .. attribute:: DUP15
+      :annotation: = 142
+
+      
+
+   .. attribute:: DUP16
+      :annotation: = 143
+
+      
+
+   .. attribute:: SWAP1
+      :annotation: = 144
+
+      
+
+   .. attribute:: SWAP2
+      :annotation: = 145
+
+      
+
+   .. attribute:: SWAP3
+      :annotation: = 146
+
+      
+
+   .. attribute:: SWAP4
+      :annotation: = 147
+
+      
+
+   .. attribute:: SWAP5
+      :annotation: = 148
+
+      
+
+   .. attribute:: SWAP6
+      :annotation: = 149
+
+      
+
+   .. attribute:: SWAP7
+      :annotation: = 150
+
+      
+
+   .. attribute:: SWAP8
+      :annotation: = 151
+
+      
+
+   .. attribute:: SWAP9
+      :annotation: = 152
+
+      
+
+   .. attribute:: SWAP10
+      :annotation: = 153
+
+      
+
+   .. attribute:: SWAP11
+      :annotation: = 154
+
+      
+
+   .. attribute:: SWAP12
+      :annotation: = 155
+
+      
+
+   .. attribute:: SWAP13
+      :annotation: = 156
+
+      
+
+   .. attribute:: SWAP14
+      :annotation: = 157
+
+      
+
+   .. attribute:: SWAP15
+      :annotation: = 158
+
+      
+
+   .. attribute:: SWAP16
+      :annotation: = 159
+
+      
+
+
+
+op_implementation
+~~~~~~~~~~~~~~~~~
+
+.. data:: op_implementation
+   :annotation: :Dict[Ops, Callable]
+
+   
+

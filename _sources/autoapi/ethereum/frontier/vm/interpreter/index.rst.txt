@@ -1,0 +1,63 @@
+:mod:`ethereum.frontier.vm.interpreter`
+=======================================
+
+.. py:module:: ethereum.frontier.vm.interpreter
+
+Ethereum Virtual Machine (EVM) Interpreter
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+A straightforward interpreter that executes EVM code.
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+   :nosignatures:
+
+   ethereum.frontier.vm.interpreter.process_call
+
+
+
+Module Details
+---------------
+
+process_call
+~~~~~~~~~~~~
+
+
+.. function:: process_call(caller: ethereum.frontier.eth_types.Address, target: ethereum.frontier.eth_types.Address, data: bytes, value: ethereum.base_types.U256, gas: ethereum.base_types.U256, depth: ethereum.base_types.Uint, env: ethereum.frontier.vm.Environment) -> Tuple[ethereum.base_types.U256, List[ethereum.frontier.eth_types.Log]]
+   :noindexentry:
+
+   Executes a call from the `caller` to the `target` in a new EVM instance.
+
+   :param caller: Account which initiated this call.
+   :param target: Account whose code will be executed.
+   :param data: Array of bytes provided to the code in `target`.
+   :param value: Value to be transferred.
+   :param gas: Gas provided for the code in `target`.
+   :param depth: Number of call/contract creation environments on the call stack.
+   :param env: External items required for EVM execution.
+
+   :returns: **output** -- The tuple `(gas_left, logs)`, where `gas_left` is the remaining gas
+             after execution, and logs is the list of `eth1spec.eth_types.Log`
+             generated during execution.
+   :rtype: `Tuple[U256, List[eth1spec.eth_types.Log]]`
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/interpreter.py
+   :language: python
+   :lines: 25-104
